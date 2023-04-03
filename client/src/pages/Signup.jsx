@@ -21,12 +21,32 @@ import {
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { signup } from "../redux/authReducer/action";
 
 export default function Signup() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const taketoNewPage = (props) => {
     navigate(props);
+  };
+
+  const { name, email, password } = useSelector((s) => s.auth);
+
+  const [details, setDetails] = useState();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDetails({ ...details, [name]: value });
+  };
+  const handleSubmit = () => {
+    if (details.name && details.email && details.password) {
+      dispatch(signup(details));
+    } else {
+      alert("fill all the details");
+    }
   };
 
   return (
@@ -73,25 +93,31 @@ export default function Signup() {
         <FormControl id="userName" isRequired>
           <FormLabel>User name</FormLabel>
           <Input
+            onChange={handleChange}
             placeholder="UserName"
             _placeholder={{ color: "gray.500" }}
             type="text"
+            name="name"
           />
         </FormControl>
         <FormControl id="email" isRequired>
           <FormLabel>Email address</FormLabel>
           <Input
+            onChange={handleChange}
             placeholder="your-email@example.com"
             _placeholder={{ color: "gray.500" }}
             type="email"
+            name="email"
           />
         </FormControl>
         <FormControl id="password" isRequired>
           <FormLabel>Password</FormLabel>
           <Input
+            onChange={handleChange}
             placeholder="password"
             _placeholder={{ color: "gray.500" }}
             type="password"
+            name="password"
           />
         </FormControl>
         <Stack spacing={6} direction={["column", "row"]}>
@@ -103,6 +129,7 @@ export default function Signup() {
             _hover={{
               bg: "blue.500",
             }}
+            onClick={handleSubmit}
           >
             Submit
           </Button>

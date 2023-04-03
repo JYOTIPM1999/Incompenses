@@ -14,9 +14,11 @@ import {
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Login() {
   const navigate = useNavigate();
+  // const { name, email, password } = useSelector((s) => s.auth);
 
   const taketoNewPage = (props) => {
     navigate(props);
