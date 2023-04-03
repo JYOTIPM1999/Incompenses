@@ -12,19 +12,19 @@ let initState = {
   //   invalidEmail: false,
   //   wrongLoginCreds: false,
   //   redirectOtp: false,
-  name: "",
-  email: "",
-  password: "",
+  name: "Jyoti",
+  email: "abc",
+  password: "123",
 };
 
 export const authReducer = (state = initState, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case SIGNUP:
+      console.log("Hello", action.payload.name);
       return {
         ...state,
         name: action.payload.name,
-        email: action.payload.password,
+        email: action.payload.email,
         password: action.payload.password,
       };
 
