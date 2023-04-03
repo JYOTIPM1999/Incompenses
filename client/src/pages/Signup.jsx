@@ -33,9 +33,9 @@ export default function Signup() {
     navigate(props);
   };
 
-  const { name, email, password } = useSelector((s) => s.auth);
+  // const { name, email, password } = useSelector((s) => s.auth);
 
-  const [details, setDetails] = useState();
+  const [details, setDetails] = useState({ name: "", email: "", password: "" });
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -14,11 +14,28 @@ import {
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/authReducer/action";
+import { useState } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
-  // const { name, email, password } = useSelector((s) => s.auth);
+  const dispatch = useDispatch();
+
+  const [details, setDetails] = useState({ email: "", password: "" });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDetails({ ...details, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    if (details.email && details.password) {
+      dispatch(login(details));
+    } else {
+      alert("fill all the details");
+    }
+  };
 
   const taketoNewPage = (props) => {
     navigate(props);
@@ -72,6 +89,8 @@ export default function Login() {
             placeholder="your-email@example.com"
             _placeholder={{ color: "gray.500" }}
             type="email"
+            name="email"
+            onChange={handleChange}
           />
         </FormControl>
 
@@ -81,6 +100,8 @@ export default function Login() {
             placeholder="password"
             _placeholder={{ color: "gray.500" }}
             type="password"
+            name="password"
+            onChange={handleChange}
           />
         </FormControl>
 
@@ -92,6 +113,7 @@ export default function Login() {
             _hover={{
               bg: "blue.500",
             }}
+            onClick={handleSubmit}
           >
             Submit
           </Button>
