@@ -24,10 +24,13 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-
-const Links = false ? ["Transactions", "Statistics"] : ["Login", "Signup"];
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const { isLogin } = useSelector((s) => s.auth);
+
+  const Links = isLogin ? ["Transactions", "Statistics"] : ["Login", "Signup"];
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

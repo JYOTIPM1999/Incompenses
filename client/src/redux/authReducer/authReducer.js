@@ -1,14 +1,13 @@
 import { LOGIN, SIGNUP } from "./actionsTypes";
 
 const initState = {
-  name: "Jyoti",
-  email: "abc",
-  password: "123",
+  name: "",
+  email: "",
+  password: "",
+  isLogin: false,
 };
 
-console.log(initState);
 export const authReducer = (state = initState, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case SIGNUP:
       return {
@@ -19,11 +18,18 @@ export const authReducer = (state = initState, action) => {
       };
 
     case LOGIN:
-      return {
-        ...state,
-        email: action.payload.email,
-        password: action.payload.password,
-      };
+      if (action.payload === false) {
+        return {
+          ...state,
+        };
+      } else {
+        return {
+          ...state,
+          email: action.payload.email,
+          password: action.payload.password,
+          isLogin: true,
+        };
+      }
 
     default:
       return state;

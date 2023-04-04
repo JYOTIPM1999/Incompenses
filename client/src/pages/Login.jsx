@@ -16,13 +16,15 @@ import { SmallCloseIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/authReducer/action";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [details, setDetails] = useState({ email: "", password: "" });
+
+  const { isLogin } = useSelector((s) => s.auth);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +38,11 @@ export default function Login() {
       alert("fill all the details");
     }
   };
+  useEffect(() => {
+    if (isLogin) {
+      navigate("/");
+    }
+  });
 
   const taketoNewPage = (props) => {
     navigate(props);
