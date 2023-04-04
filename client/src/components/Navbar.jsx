@@ -10,7 +10,7 @@ import {
   Flex,
   Avatar,
   HStack,
-  Link,
+  // Link,
   IconButton,
   Button,
   Menu,
@@ -23,24 +23,9 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const Links = false ? ["Transactions", "Statistics"] : ["Login", "Signup"];
-
-const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={children}
-  >
-    {children}
-  </Link>
-);
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -57,14 +42,16 @@ const Navbar = () => {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Box>Logo</Box>
+            <Link to="/">Home</Link>
             <HStack
               as={"nav"}
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <Link key={link} to={link}>
+                  {link}
+                </Link>
               ))}
             </HStack>
           </HStack>
@@ -98,7 +85,9 @@ const Navbar = () => {
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <Link key={link} to={link}>
+                  {link}
+                </Link>
               ))}
             </Stack>
           </Box>

@@ -137,7 +137,6 @@ export default function Signup() {
           >
             Submit
           </Button>
-          <Link to="/">Home</Link>
         </Stack>
       </Stack>
     </Flex>
