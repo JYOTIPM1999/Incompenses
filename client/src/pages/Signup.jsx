@@ -20,7 +20,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { signup } from "../redux/authReducer/action";
@@ -41,6 +41,7 @@ export default function Signup() {
     const { name, value } = e.target;
     setDetails({ ...details, [name]: value });
   };
+
   const handleSubmit = () => {
     if (details.name && details.email && details.password) {
       dispatch(signup(details));
@@ -73,7 +74,10 @@ export default function Signup() {
           <FormLabel>User Icon</FormLabel>
           <Stack direction={["column", "row"]} spacing={6}>
             <Center>
-              <Avatar size="xl" src="https://bit.ly/sage-adebayo">
+              <Avatar
+                size="xl"
+                src="https://res.cloudinary.com/dehubjbqm/image/upload/v1680583094/DSC_5396-removebg-preview_dsi2ks.png"
+              >
                 <AvatarBadge
                   as={IconButton}
                   size="sm"
@@ -133,6 +137,7 @@ export default function Signup() {
           >
             Submit
           </Button>
+          <Link to="/">Home</Link>
         </Stack>
       </Stack>
     </Flex>

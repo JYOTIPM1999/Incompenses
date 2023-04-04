@@ -1,26 +1,16 @@
 import { LOGIN, SIGNUP } from "./actionsTypes";
 
-let initState = {
-  //   token: localStorage.getItem("authToken"),
-  //   isAuth: !!localStorage.getItem("authToken"),
-  //   otpVerified: false,
-  //   signupState: false,
-  //   userExists: false,
-  //   fillSignup: false,
-  //   wrongOtp: false,
-  //   successOtp: false,
-  //   invalidEmail: false,
-  //   wrongLoginCreds: false,
-  //   redirectOtp: false,
+const initState = {
   name: "Jyoti",
   email: "abc",
   password: "123",
 };
 
+console.log(initState);
 export const authReducer = (state = initState, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case SIGNUP:
-      console.log("Hello", action.payload.name);
       return {
         ...state,
         name: action.payload.name,
@@ -29,11 +19,6 @@ export const authReducer = (state = initState, action) => {
       };
 
     case LOGIN:
-      //   if (
-      //     action.payload !== "wrong credentials" &&
-      //     action.payload !== "verify otp"
-      //   )
-      //     localStorage.setItem("authToken", action.payload.token);
       return {
         ...state,
         email: action.payload.email,

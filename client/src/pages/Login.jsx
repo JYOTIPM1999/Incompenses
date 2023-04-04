@@ -65,7 +65,10 @@ export default function Login() {
           <FormLabel>User Icon</FormLabel>
           <Stack direction={["column", "row"]} spacing={6}>
             <Center>
-              <Avatar size="xl" src="https://bit.ly/sage-adebayo">
+              <Avatar
+                size="xl"
+                src="https://res.cloudinary.com/dehubjbqm/image/upload/v1680583094/DSC_5396-removebg-preview_dsi2ks.png"
+              >
                 <AvatarBadge
                   as={IconButton}
                   size="sm"
