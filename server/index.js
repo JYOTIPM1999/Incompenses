@@ -1,12 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const userRouter = require("./routes/user.routes");
+const transactionRouter = require("./routes/transaction.routes");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const PORT = process.env.PORT || 8080;
-const URL =
-  process.env.URL ||
-  "mongodb+srv://jyotipm1999:jyotipm1999@cluster0.i33ampy.mongodb.net/test";
 
 const app = express();
 app.use(cors());
@@ -15,19 +12,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/user", userRouter);
-
-app.get("/", (req, res) => res.send("hello express"));
+app.use("/transcation", transactionRouter);
 
 mongoose
-  .connect(URL, {
+  .connect(process.env.URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    app.listen(PORT, () => {
-      console.log("server started on port 8085");
+    app.listen(process.env.PORT, () => {
+      console.log(`server started on port no ${process.env.PORT}`);
     });
   })
   .catch((err) => {
-    console.log("error occured");
+    console.log(err.message);
   });
