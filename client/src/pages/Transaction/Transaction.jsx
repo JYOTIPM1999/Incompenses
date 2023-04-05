@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Thead,
@@ -6,12 +6,22 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
   Button,
 } from "@chakra-ui/react";
 
+import data from "../../data/db.json";
+
 const Transaction = () => {
+  const [database, setDatabase] = useState([]);
+
+  useEffect(() => {
+    setDatabase(data.data);
+  }, []);
+
+  for (let i = 0; i < database.length; i++) {
+    console.log(database[i].date);
+  }
   return (
     <>
       <Button
@@ -35,30 +45,22 @@ const Transaction = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td isNumeric>1</Td>
-              <Td>Study mat</Td>
-              <Td>Reaceived from Bapa</Td>
-              <Td isNumeric>5000</Td>
-              <Td>
-                <Button>Edit</Button>
-              </Td>
-              <Td>
-                <Button>Delete</Button>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td isNumeric>2</Td>
-              <Td>Gala Khia</Td>
-              <Td>Paid to Riki</Td>
-              <Td isNumeric>-2000</Td>
-              <Td>
-                <Button>Edit</Button>
-              </Td>
-              <Td>
-                <Button>Delete</Button>
-              </Td>
-            </Tr>
+            {database.map((el, i) => (
+              <Tr key={i}>
+                <Td isNumeric>{el.id}</Td>
+                <Td>
+                  {el.category} ({el.account})
+                </Td>
+                <Td>{el.description}</Td>
+                <Td isNumeric>{el.amount}</Td>
+                <Td>
+                  <Button>Edit</Button>
+                </Td>
+                <Td>
+                  <Button>Delete</Button>
+                </Td>
+              </Tr>
+            ))}
           </Tbody>
         </Table>
       </TableContainer>
