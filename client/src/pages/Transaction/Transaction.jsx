@@ -40,7 +40,12 @@ const Transaction = () => {
       <TableContainer>
         {Object.keys(groupedData).map((date) => {
           return (
-            <Table key={date} variant="striped" colorScheme="blue">
+            <Table
+              key={date}
+              variant="striped"
+              bgGradient="linear(to-r, red.400,orange.400,yellow.500)"
+              // bgClip="text"
+            >
               <Thead>
                 <Tr>
                   <Th>{date}</Th>
