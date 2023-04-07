@@ -13,15 +13,20 @@ import {
 import data from "../../data/db.json";
 
 const Transaction = () => {
-  const [database, setDatabase] = useState([]);
+  // const [database, setDatabase] = useState([]);
 
-  useEffect(() => {
-    setDatabase(data.data);
-  }, []);
+  // useEffect(() => {
+  //   setDatabase(data.data);
+  // }, []);
 
-  for (let i = 0; i < database.length; i++) {
-    console.log(database[i].date);
-  }
+  const groupedData = data.data.reduce((acc, item) => {
+    if (!acc[item.date]) {
+      acc[item.date] = [];
+    }
+    acc[item.date].push(item);
+    return acc;
+  }, {});
+
   return (
     <>
       <Button
@@ -33,36 +38,40 @@ const Transaction = () => {
         ADD
       </Button>
       <TableContainer>
-        <Table variant="striped" colorScheme="teal">
-          <Thead>
-            <Tr>
-              <Th>Transaction Date</Th>
-              <Th>Category</Th>
-              <Th>Desc</Th>
-              <Th isNumeric>Income/Expense</Th>
-              <Th>Edit</Th>
-              <Th>Delete</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {database.map((el, i) => (
-              <Tr key={i}>
-                <Td isNumeric>{el.id}</Td>
-                <Td>
-                  {el.category} ({el.account})
-                </Td>
-                <Td>{el.description}</Td>
-                <Td isNumeric>{el.amount}</Td>
-                <Td>
-                  <Button>Edit</Button>
-                </Td>
-                <Td>
-                  <Button>Delete</Button>
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
+        {Object.keys(groupedData).map((date) => {
+          return (
+            <Table key={date} variant="striped" colorScheme="blue">
+              <Thead>
+                <Tr>
+                  <Th>{date}</Th>
+                  <Th>Category</Th>
+                  <Th>Desc</Th>
+                  <Th isNumeric>Income/Expense</Th>
+                  <Th>Edit</Th>
+                  <Th>Delete</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {groupedData[date].map((el, i) => (
+                  <Tr key={i}>
+                    <Td isNumeric>{el.id}</Td>
+                    <Td>
+                      {el.category} ({el.account})
+                    </Td>
+                    <Td>{el.description}</Td>
+                    <Td isNumeric>{el.amount}</Td>
+                    <Td>
+                      <Button>Edit</Button>
+                    </Td>
+                    <Td>
+                      <Button>Delete</Button>
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          );
+        })}
       </TableContainer>
     </>
   );
