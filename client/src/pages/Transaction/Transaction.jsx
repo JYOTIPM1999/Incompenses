@@ -48,7 +48,7 @@ const Transaction = () => {
             >
               <Thead>
                 <Tr>
-                  <Th>{date}</Th>
+                  <Th>Date:-{date}</Th>
                   <Th>Category</Th>
                   <Th>Desc</Th>
                   <Th isNumeric>Income/Expense</Th>
@@ -66,10 +66,10 @@ const Transaction = () => {
                     <Td>{el.description}</Td>
                     <Td isNumeric>{el.amount}</Td>
                     <Td>
-                      <Button>Edit</Button>
+                      <Button colorScheme="green">Edit</Button>
                     </Td>
                     <Td>
-                      <Button>Delete</Button>
+                      <Button colorScheme="red">Delete</Button>
                     </Td>
                   </Tr>
                 ))}
