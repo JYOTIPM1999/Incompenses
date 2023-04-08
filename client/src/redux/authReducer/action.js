@@ -8,8 +8,10 @@ export const signup = (details) => async (dispatch) => {
 };
 export const login = (details) => async (dispatch) => {
   let res = await axios.post("http://localhost:8085/user/login", details);
-  console.log(res.data);
-  if (res.data === "Email & password matched") {
+  localStorage.setItem("token", res.data.token);
+  localStorage.setItem("refreshToken", res.data.refreshToken);
+
+  if (res.data.message === "Email & password matched") {
     dispatch({ type: LOGIN, payload: details });
   } else {
     dispatch({ type: LOGIN, payload: false });
