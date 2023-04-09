@@ -37,6 +37,7 @@ const loginUser = async (req, res) => {
       process.env.SECRET_KEY,
       { expiresIn: "5 mins" }
     );
+
     const refreshToken = jwt.sign(
       { id: user._id, email: user.email },
       process.env.REFRESH_TOKEN,
@@ -44,6 +45,7 @@ const loginUser = async (req, res) => {
         expiresIn: "7 days",
       }
     );
+
     res
       .status(200)
       .send({ message: "Email & password matched", token, refreshToken });
@@ -51,5 +53,27 @@ const loginUser = async (req, res) => {
     res.status(401).send("Invalid email or password");
   }
 };
+// const getUserData = async (req, res) => {
+//   const { id } = req.params;
+//   const token = req.headers["authorization"];
+//   if (blacklist.includes(token)) {
+//     return 401;
+//   }
+
+//   if (!token) {
+//     return res.status(401).send("Unauthorized");
+//   }
+//   try {
+//     jwt.verify(token, process.env.SECRET_KEY);
+//     const user = await UserModel.findById(id);
+//     return res.send(user);
+//   } catch (e) {
+//     console.log(e.message);
+//     if (e.message === "jwt expired") {
+//       blacklist.push(token);
+//     }
+//     return res.status(401).send("Token is invalid");
+//   }
+// };
 
 module.exports = { registerUser, loginUser };

@@ -6,6 +6,7 @@ export const signup = (details) => async (dispatch) => {
   console.log(res);
   dispatch({ type: SIGNUP, payload: details });
 };
+
 export const login = (details) => async (dispatch) => {
   let res = await axios.post("http://localhost:8085/user/login", details);
   localStorage.setItem("token", res.data.token);
