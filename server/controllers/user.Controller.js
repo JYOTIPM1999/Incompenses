@@ -48,7 +48,7 @@ const loginUser = async (req, res) => {
       .status(200)
       .send({ message: "Email & password matched", token, refreshToken });
   } else {
-    res.status(401).send("Invalid email or password ");
+    res.status(401).send("Invalid email or password");
   }
 };
 

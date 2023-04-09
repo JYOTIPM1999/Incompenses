@@ -1,6 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const TransactionSchema = new Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "UserModel",
+    required: true,
+  },
   type: {
     type: String,
     required: true,
