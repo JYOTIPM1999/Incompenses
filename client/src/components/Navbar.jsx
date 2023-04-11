@@ -52,7 +52,12 @@ const Navbar = () => {
               display={{ base: "none", md: "flex" }}
             >
               {Links.map((link) => (
-                <Link key={link} to={link}>
+                <Link
+                  key={link}
+                  to={link}
+                  _active={{ bg: "green.500", color: "white" }}
+                  _hover={{ bg: "blue.500" }}
+                >
                   {link}
                 </Link>
               ))}
@@ -88,7 +93,11 @@ const Navbar = () => {
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
-                <Link key={link} to={link}>
+                <Link
+                  key={link}
+                  to={link}
+                  _active={{ bg: "green.500", color: "white" }}
+                >
                   {link}
                 </Link>
               ))}
